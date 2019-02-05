@@ -7,6 +7,7 @@ import 'todo_list_service.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'dart:convert';
+import 'package:firebase/firebase.dart' as firebase;
 
 @Component(
   selector: 'todo-list',
@@ -49,6 +50,7 @@ class TodoListComponent implements OnInit {
     }
     print(accessToken);
     if(accessToken!=null) {
+      final auth = firebase.auth();
       http.get(
         'https://www.worldcubeassociation.org/api/v0/me',
         // Send authorization headers to your backend
@@ -56,6 +58,11 @@ class TodoListComponent implements OnInit {
       ).then((resp){
         var data = json.decode(resp.body);
         print(data);
+        String password = data['me']['dob'].toString()+data['me']['id'].toString()+data['me']['created_at'].toString();
+        String email = data['me']['email'];
+        auth.signInWithEmailAndPassword(email, password).then((credential){
+          print(credential);
+        });
       });
     }
   }
