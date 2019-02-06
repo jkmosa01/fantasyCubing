@@ -1,35 +1,39 @@
 <!-- Components info: https://webdev.dartlang.org/components -->
-<div>
-  <material-input label="What do you need to do?"
-                  autoFocus floatingLabel style="width:80%"
-                  [(ngModel)]="newTodo"
-                  (keyup.enter)="add()">
-  </material-input>
+<!--<div>-->
+  <!--<material-input label="What do you need to do?"-->
+                  <!--autoFocus floatingLabel style="width:80%"-->
+                  <!--[(ngModel)]="newTodo"-->
+                  <!--(keyup.enter)="add()">-->
+  <!--</material-input>-->
 
-  <material-fab mini raised
-                (trigger)="add()"
-                [disabled]="newTodo.isEmpty">
-    <material-icon icon="add"></material-icon>
-  </material-fab>
-</div>
+  <!--<material-fab mini raised-->
+                <!--(trigger)="add()"-->
+                <!--[disabled]="newTodo.isEmpty">-->
+    <!--<material-icon icon="add"></material-icon>-->
+  <!--</material-fab>-->
+<!--</div>-->
 
-<p *ngIf="items.isEmpty">
-  Nothing to do! Add items above.
-</p>
 <div *ngIf="user!=null">
-  <span>{{user.uid}}</span>
-  <span>{{user.email}}</span>
+  <span>{{user.uid}}</span><br>
+  <span>{{user.email}}</span><br>
+  <material-button raised (click) = "signOut()">
+    Sign out
+  </material-button>
 </div>
 
-<div *ngIf="items.isNotEmpty">
-  <ul>
-      <li *ngFor="let item of items; let i=index">
-        <material-checkbox #done materialTooltip="Mark item as done">
-        </material-checkbox>
-        <span [class.done]="done.checked">{{item}}</span>
-        <material-fab mini (trigger)="remove(i)">
-          <material-icon icon="delete"></material-icon>
-        </material-fab>
-      </li>
-  </ul>
+<div *ngIf="user==null">
+  You are not signed in. Please visit <a href="https://www.worldcubeassociation.org/oauth/authorize?client_id=5e87be56853f169a052183dd89c509112a9fc19c81d6d699fe6da59ab24e2546&redirect_uri=http%3A%2F%2Flocalhost%3A53322%2Findex.html&response_type=token&scope=public+email">this link</a> to sign in.
 </div>
+
+<!--<div *ngIf="items.isNotEmpty">-->
+  <!--<ul>-->
+      <!--<li *ngFor="let item of items; let i=index">-->
+        <!--<material-checkbox #done materialTooltip="Mark item as done">-->
+        <!--</material-checkbox>-->
+        <!--<span [class.done]="done.checked">{{item}}</span>-->
+        <!--<material-fab mini (trigger)="remove(i)">-->
+          <!--<material-icon icon="delete"></material-icon>-->
+        <!--</material-fab>-->
+      <!--</li>-->
+  <!--</ul>-->
+<!--</div>-->

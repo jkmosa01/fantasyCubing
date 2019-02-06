@@ -19,6 +19,7 @@ import 'package:http/browser_client.dart';
     MaterialFabComponent,
     MaterialIconComponent,
     materialInputDirectives,
+    MaterialButtonComponent,
     NgFor,
     NgIf,
   ],
@@ -49,11 +50,11 @@ class UserComponent implements OnInit {
   }
 
   void onSignIn(firebase.User newUser){
-    if(newUser!=null){
-      print(newUser.email);
-      print(newUser.uid);
-    }
     user = newUser;
+  }
+
+  void signOut(){
+    firebase.auth().signOut();
   }
 
   void grabWCAMe() {
