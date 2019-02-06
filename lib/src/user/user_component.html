@@ -16,6 +16,10 @@
 <p *ngIf="items.isEmpty">
   Nothing to do! Add items above.
 </p>
+<div *ngIf="user!=null">
+  <span>{{user.uid}}</span>
+  <span>{{user.email}}</span>
+</div>
 
 <div *ngIf="items.isNotEmpty">
   <ul>

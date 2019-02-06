@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'dart:html';
-import 'todo_list_service.dart';
+import 'user_service.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'dart:convert';
@@ -12,8 +12,8 @@ import 'package:http/browser_client.dart';
 
 @Component(
   selector: 'todo-list',
-  styleUrls: ['todo_list_component.css'],
-  templateUrl: 'todo_list_component.html',
+  styleUrls: ['user_component.css'],
+  templateUrl: 'user_component.html',
   directives: [
     MaterialCheckboxComponent,
     MaterialFabComponent,
@@ -22,19 +22,20 @@ import 'package:http/browser_client.dart';
     NgFor,
     NgIf,
   ],
-  providers: [ClassProvider(TodoListService)],
+  providers: [ClassProvider(UserService)],
 )
-class TodoListComponent implements OnInit {
-  final TodoListService todoListService;
+class UserComponent implements OnInit {
+  final UserService userService;
+  firebase.User user;
 
   List<String> items = [];
   String newTodo = '';
 
-  TodoListComponent(this.todoListService);
+  UserComponent(this.userService);
 
   @override
   Future<Null> ngOnInit() async {
-    items = await todoListService.getTodoList();
+    items = await userService.getTodoList();
     firebase.initializeApp(
         apiKey: "AIzaSyCmCYL8d5w1vpOezmV2l2OBFCxAaDSc3YI",
         authDomain: "fantasy-cubing.firebaseapp.com",
@@ -43,7 +44,16 @@ class TodoListComponent implements OnInit {
         storageBucket: "fantasy-cubing.appspot.com",
         messagingSenderId: "7563614714"
     );
+    firebase.auth().onAuthStateChanged.listen(onSignIn);
     grabWCAMe();
+  }
+
+  void onSignIn(firebase.User newUser){
+    if(newUser!=null){
+      print(newUser.email);
+      print(newUser.uid);
+    }
+    user = newUser;
   }
 
   void grabWCAMe() {
