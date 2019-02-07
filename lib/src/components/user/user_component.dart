@@ -11,14 +11,14 @@ import 'package:firebase/firebase.dart' as firebase;
 import 'package:http/browser_client.dart';
 
 @Component(
-  selector: 'todo-list',
+  selector: 'user-component',
   styleUrls: ['user_component.css'],
   templateUrl: 'user_component.html',
   directives: [
-    MaterialCheckboxComponent,
-    MaterialFabComponent,
-    MaterialIconComponent,
-    materialInputDirectives,
+//    MaterialCheckboxComponent,
+//    MaterialFabComponent,
+//    MaterialIconComponent,
+//    materialInputDirectives,
     MaterialButtonComponent,
     NgFor,
     NgIf,
@@ -68,7 +68,6 @@ class UserComponent implements OnInit {
           accessToken = "Bearer " + temp[1];
         }
       }
-      print(accessToken);
       if (accessToken != null && user==null) {
         var client = new BrowserClient();
         client.get(

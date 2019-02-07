@@ -1,0 +1,16 @@
+#header{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 42px;
+    background-color: #EEEEEE;
+}
+#headerTitle{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    font-size: 20px;
+    transform: translate(-50%, -50%);
+}
