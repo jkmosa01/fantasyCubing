@@ -69,44 +69,34 @@ class UserComponent implements OnInit {
         }
       }
       print(accessToken);
-      String uid;
-      if (accessToken != null) {
+      if (accessToken != null && user==null) {
         var client = new BrowserClient();
         client.get(
           'https://www.worldcubeassociation.org/api/v0/me',
           // Send authorization headers to your backend
           headers: {HttpHeaders.authorizationHeader: accessToken},
-        )
-            .then((resp) {
+        ).then((resp) {
           var data = json.decode(resp.body);
-          print(data);
           String password = data['me']['dob'].toString() +
               data['me']['id'].toString() + data['me']['created_at'].toString();
           String email = data['me']['email'];
-          print(password);
-          print(email);
-          firebase.auth().signInWithEmailAndPassword(email, password).then((
-              credential) {
-            print(credential);
-            print(credential.user.uid);
-            uid = credential.user.uid;
-          }).catchError((error) {
-            firebase.auth()
-                .createUserWithEmailAndPassword(email, password)
-                .then((credential) {
-              print(credential);
-              print(credential.user.uid);
-              uid = credential.user.uid;
+          firebase.auth().signInWithEmailAndPassword(email, password).then((credential) {}).catchError((error) {
+            firebase.auth().createUserWithEmailAndPassword(email, password).then((credential) {
+              firebase.firestore().collection("users").doc(credential.user.uid).set({
+                "id": data['me']['id'],
+                "wca_id": data['me']['wca_id'],
+                "name": data['me']['name'],
+              });
             }).catchError((error) {
               print(error);
             });
           });
         });
-        print(uid);
       }
     }
   }
-
+  //{
+  //  me: {class: user, url: https://www.worldcubeassociation.org/persons/2014MOSA01, id: 28262, wca_id: 2014MOSA01, name: Jordan Mosakowski, gender: m, country_iso2: US, delegate_status: null, created_at: 2016-08-27T15:18:08.000Z, updated_at: 2019-02-06T18:23:45.000Z, teams: [], avatar: {url: https://www.worldcubeassociation.org/assets/missing_avatar_thumb-f0ea801c804765a22892b57636af829edbef25260a65d90aaffbd7873bde74fc.png, thumb_url: https://www.worldcubeassociation.org/assets/missing_avatar_thumb-f0ea801c804765a22892b57636af829edbef25260a65d90aaffbd7873bde74fc.png, is_default: true}, email: jordanmosakowski@gmail.com}}
   void add() {
     items.add(newTodo);
     newTodo = '';

@@ -1,16 +1,16 @@
 import 'package:angular/angular.dart';
 
-import 'src/user/user_component.dart';
+import 'package:fantasyCubing/src/components/user/user_component.dart';
 
 // AngularDart info: https://webdev.dartlang.org/angular
 // Components info: https://webdev.dartlang.org/components
 
 @Component(
   selector: 'my-app',
-  styleUrls: ['app_component.css'],
-  templateUrl: 'app_component.html',
+  styleUrls: ['main_page.css'],
+  templateUrl: 'main_page.html',
   directives: [UserComponent],
 )
 class AppComponent {
-  // Nothing here yet. All logic is in TodoListComponent.
+
 }

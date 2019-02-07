@@ -1,7 +1,7 @@
 @TestOn('browser')
 import 'package:angular_test/angular_test.dart';
 import 'package:test/test.dart';
-import 'package:fantasyCubing/app_component.dart';
+import 'package:fantasyCubing/src/pages/main/main_page.dart';
 import 'package:fantasyCubing/app_component.template.dart' as ng;
 
 void main() {
