@@ -21,7 +21,7 @@
   </material-button>
 </div>
 
-<div *ngIf="user==null">
+<div *ngIf="!isSignedIn()">
   You are not signed in. Please visit <a href="https://www.worldcubeassociation.org/oauth/authorize?client_id=5e87be56853f169a052183dd89c509112a9fc19c81d6d699fe6da59ab24e2546&redirect_uri=http%3A%2F%2Flocalhost%3A53322%2Findex.html&response_type=token&scope=public+email">this link</a> to sign in.
 </div>
 

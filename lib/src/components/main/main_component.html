@@ -1,0 +1,22 @@
+<div>
+    <h3>Week of January 2-9</h3>
+    This week's score: 304<br>
+    Last week's score: 0<br>
+    <h4>Team:</h4>
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>Event</td>
+            <td>Score</td>
+        </tr>
+        <tr *ngFor="let row of testList">
+            <td>{{row['name']}}</td>
+            <td>{{row['event']}}</td>
+            <td>{{row['score']}}</td>
+        </tr>
+    </table>
+</div>
+<!--<div>-->
+    <!--<h5>Welcome to Fantasy Cubing.</h5>-->
+    <!--Please sign in to get started.-->
+<!--</div>-->

@@ -1,6 +1,4 @@
 <header-component></header-component>
 <h1>Fantasy Cubing</h1>
-<user-component *ngIf="getCurrentPage()==0"></user-component>
-<div *ngIf="getCurrentPage()==1">
-    This will be the main screen
-</div>
+<user-component *ngIf="getCurrentPage()==1"></user-component>
+<main-component *ngIf="getCurrentPage()==0"></main-component>
