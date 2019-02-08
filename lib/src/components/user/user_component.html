@@ -13,7 +13,7 @@
   <!--</material-fab>-->
 <!--</div>-->
 
-<div *ngIf="user!=null">
+<div *ngIf="isSignedIn()">
   <span>{{user.uid}}</span><br>
   <span>{{user.email}}</span><br>
   <material-button raised (click) = "signOut()">

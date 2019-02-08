@@ -1,5 +1,6 @@
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
+import 'package:fantasyCubing/src/globals.dart' as globals;
 
 @Component(
   selector: 'header-component',
@@ -20,6 +21,10 @@ class HeaderComponent implements OnInit {
 
   @override
   Future<Null> ngOnInit() async {
+  }
+
+  void setCurrentPage(int page){
+    globals.currentPage = page;
   }
 
 }
