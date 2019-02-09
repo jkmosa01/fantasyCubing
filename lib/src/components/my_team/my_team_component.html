@@ -1,0 +1,31 @@
+<h3>Week of January 2 - 9</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Person</th>
+            <th>Event</th>
+        </tr>
+    </thead>
+    <tr *ngFor="let person of myTeam; let i=index">
+        <td>{{person.name}}</td>
+        <td>{{person.wcaId}}</td>
+        <td>{{person.event}}</td>
+        <material-button raised (click) = "selectPerson(i)">
+            Select
+        </material-button>
+    </tr>
+</table>
+<div id="myTeamSelectBehind" *ngIf="picking" (click)="closeSelect()"></div>
+<div id="myTeamSelect" *ngIf="picking">
+    <material-input label="Enter a name or WCA ID..."
+        autoFocus floatingLabel style="width:300px; left:100px; right: 100px; position: absolute ">
+    </material-input>
+    <material-dropdown-select
+            [options]="events"
+            [(selection)]="eventSelected"
+            [buttonText]="...">
+    </material-dropdown-select>
+    <material-button raised>
+        Done
+    </material-button>
+</div>

@@ -14,3 +14,8 @@
     font-size: 20px;
     transform: translate(-50%, -50%);
 }
+.verticalCenter{
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+}
