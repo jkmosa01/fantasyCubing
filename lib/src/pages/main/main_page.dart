@@ -12,7 +12,7 @@ import 'package:fantasyCubing/src/globals.dart' as globals;
   selector: 'my-app',
   styleUrls: ['main_page.css'],
   templateUrl: 'main_page.html',
-  directives: [UserComponent,HeaderComponent,MainComponent,NgIf,MainComponent],
+  directives: [UserComponent,HeaderComponent,MainComponent,MyTeamComponent,NgIf,MainComponent],
 )
 class AppComponent {
 
