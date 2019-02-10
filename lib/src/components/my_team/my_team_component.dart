@@ -35,8 +35,30 @@ class MyTeamComponent implements OnInit {
   List<PersonSelection> myTeam = List(10);
   bool picking;
   int currentlyPicking;
+  String currentInput;
+  BrowserClient client = new BrowserClient();
   final events = ["3x3","2x2","4x4","5x5","6x6","7x7","Pyraminx","Skewb","Megaminx","Clock","Square-1","OH","Feet","3BLD","4BLD","5BLD","MBLD","FMC"];
   var eventSelected = "3x3";
+  final parseEvents = {
+  "3x3": "333",
+  "2x2": "222",
+  "4x4": "444",
+  "5x5": "555",
+  "6x6": "666",
+  "7x7": "777",
+  "Pyraminx": "pyram",
+  "Skewb": "skewb",
+  "Megaminx": "minx",
+  "Clock": "clock",
+  "Square-1": "sq1",
+  "OH": "333oh",
+  "Feet": "333ft",
+  "3BLD": "333bf",
+  "4BLD": "444bf",
+  "5BLD": "555bf",
+  "MBLD": "333mbf",
+  "FMC": "333fm"
+  };
   List<PersonSearch> searchResults;
   @override
   Future<Null> ngOnInit() async {
@@ -46,18 +68,21 @@ class MyTeamComponent implements OnInit {
     }
   }
   void selectPerson(i){
-    print(i);
+    currentlyPicking = i;
+    eventSelected = "3x3";
+    searchResults = [];
     picking = true;
   }
 
   void closeSelect(){
+    currentlyPicking = null;
     picking = false;
   }
 
   void getPeoples(String text){
+    currentInput = text;
     searchResults = [];
     if(text.length>1){
-      var client = new BrowserClient();
       client.get(
         'https://www.worldcubeassociation.org/api/v0/search/users?q='+text,
       ).then((response){
@@ -78,6 +103,31 @@ class MyTeamComponent implements OnInit {
 
   void choosePerson(int i){
     print(searchResults[i].wcaId);
+    print(eventSelected);
+  }
+
+  void selectThisPerson(){
+    client.get(
+      'https://www.worldcubeassociation.org/api/v0/persons/'+currentInput,
+    ).then((response){
+      if(response.statusCode==200) {
+        var data = json.decode(response.body)['person'];
+        myTeam[currentlyPicking].name = data['name'];
+        myTeam[currentlyPicking].wcaId = data['wca_id'];
+        myTeam[currentlyPicking].event = parseEvents[eventSelected];
+        closeSelect();
+      }
+      else{
+        myTeam[currentlyPicking].wcaId = currentInput;
+        myTeam[currentlyPicking].event = parseEvents[eventSelected];
+        closeSelect();
+      }
+    }).catchError((error){
+      myTeam[currentlyPicking].wcaId = currentInput;
+      myTeam[currentlyPicking].event = parseEvents[eventSelected];
+      closeSelect();
+    });
+
   }
 
 }
