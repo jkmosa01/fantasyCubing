@@ -93,7 +93,6 @@ class MyTeamComponent implements OnInit {
     eventSelected = getEvent[myTeam[i].event ?? "333"];
     currentInput = myTeam[i].wcaId ?? "";
     getPeoples(myTeam[i].wcaId ?? "");
-    searchResults = [];
     picking = true;
   }
 
@@ -126,6 +125,7 @@ class MyTeamComponent implements OnInit {
 
   void choosePerson(int i){
     currentInput = searchResults[i].wcaId;
+    searchResults = [];
   }
 
   void selectThisPerson(){
