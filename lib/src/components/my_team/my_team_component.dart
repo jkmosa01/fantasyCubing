@@ -59,6 +59,27 @@ class MyTeamComponent implements OnInit {
   "MBLD": "333mbf",
   "FMC": "333fm"
   };
+
+  final Map<String,String> getEvent = {
+    "333": "3x3",
+    "222": "2x2",
+    "444": "4x4",
+    "555": "5x5",
+    "666": "6x6",
+    "777": "7x7",
+    "pyram": "Pyraminx",
+    "skewb": "Skewb",
+    "minx": "Megaminx",
+    "clock": "Clock",
+    "sq1": "Square-1",
+    "333oh": "OH",
+    "333ft": "Feet",
+    "333bf": "3BLD",
+    "444bf": "4BLD",
+    "555bf": "5BLD",
+    "333mbf": "MBLD",
+    "333fm": "FMC"
+  };
   List<PersonSearch> searchResults;
   @override
   Future<Null> ngOnInit() async {
@@ -69,7 +90,9 @@ class MyTeamComponent implements OnInit {
   }
   void selectPerson(i){
     currentlyPicking = i;
-    eventSelected = "3x3";
+    eventSelected = getEvent[myTeam[i].event ?? "333"];
+    currentInput = myTeam[i].wcaId ?? "";
+    getPeoples(myTeam[i].wcaId ?? "");
     searchResults = [];
     picking = true;
   }
@@ -102,8 +125,7 @@ class MyTeamComponent implements OnInit {
   }
 
   void choosePerson(int i){
-    print(searchResults[i].wcaId);
-    print(eventSelected);
+    currentInput = searchResults[i].wcaId;
   }
 
   void selectThisPerson(){

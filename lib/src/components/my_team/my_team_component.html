@@ -18,7 +18,7 @@
 <div id="myTeamSelectBehind" *ngIf="picking" (click)="closeSelect()"></div>
 <div id="myTeamSelect" *ngIf="picking" style="padding: 10px 100px;">
     <material-input label="Enter a name or WCA ID..."
-        autoFocus floatingLabel style="width:300px;" ngModel (ngModelChange)="getPeoples($event)">
+        autoFocus floatingLabel style="width:300px;" [ngModel]="currentInput" (ngModelChange)="getPeoples($event)">
     </material-input>
     <material-dropdown-select
             [options]="events"
