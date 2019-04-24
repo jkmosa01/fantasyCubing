@@ -11,6 +11,8 @@ import 'package:angular_components/material_list/material_list.dart';
 import 'package:angular_components/material_list/material_list_item.dart';
 import 'package:angular_components/material_select/material_select_item.dart';
 import 'package:angular_components/model/selection/selection_model.dart';
+import 'package:firebase/firebase.dart' as firebase;
+import 'package:fantasyCubing/src/globals.dart' as globals;
 
 @Component(
   selector: 'my-team',
@@ -152,4 +154,13 @@ class MyTeamComponent implements OnInit {
 
   }
 
+  void saveTeam(){
+    print("saving team");
+     if(globals.signedIn){
+       firebase.User user = firebase.auth().currentUser;
+       firebase.firestore().collection("week1").doc(user.uid).set({
+         'team': myTeam.map((person) => person.toMap())
+       });
+     }
+  }
 }
